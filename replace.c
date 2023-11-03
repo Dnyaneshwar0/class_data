@@ -1,56 +1,71 @@
 #include<stdio.h>
 #include<string.h>
 
-
-int i,j;
-char str[100];
-void replace(char wrd[10][10], char s_wrd[10], char rplc[10])
+char words[50][20];
+int i, j, ind;
+void seperate(char arr[])
 {
-	for(i=0;i<10;i++)
-	{
-		
-		for(j=0;;)
-		
-		if(wrd[i]!=s_wrd)
-		{
-			continue;
-		}
-		int n=strlen(s_wrd);
-		for(j=0;j<n;j++)
-		{
-			wrd[i][j]==rplc[j];
-		}
-	}
+    int w_len;
+    while(arr[i]!='\0')
+    {
+        if(arr[i]==' ')
+        {   
+            words[ind][w_len]='\0';  
+            ind++;
+            w_len=0;
+        }
+        else
+        {
+            words[ind][w_len]=arr[i];
+            w_len++;
+        }
+        i++;
+    }
 }
-
+void display()
+{
+    for(i=0,j=0;i<=ind;i++)
+    {
+        printf("%s ", words[i]);
+    }
+}
+void replace(char srch[], char rplc[])
+{
+    int wrd_len,ch;
+    for(i=0;i<ind;i++)
+    {
+        ch=0;
+        for(j=0;srch[j]!='\0';j++)
+        {
+            if(words[i][j]!=srch[j])
+            {
+                ch=1;
+                break;
+            }
+        }
+        if(ch==0)
+        {
+            j=-1;
+           do
+            {
+                ++j;
+                words[i][j]=rplc[j];
+            }while(rplc[j]!='\0');
+        }
+    }
+}
 int main()
 {
-	char src[10], rep[10];
-	printf("Enter a sentence: \n");
-	scanf("%[^\n]s",str);
-	printf("Word to find:");
-	scanf("%s",src);
-	printf("Word to replace:");
-	scanf("%s",rep);
-
-	char words[20][20];
-	int len=strlen(str);
-	//char temp[100];
-	int w_len,index;
-
-	for(i=0;i<len;i++)
-	{
-		if(str[i]==' ')
-		{
-			index++;
-			w_len=0;
-			continue;
-		}
-		words[index][w_len]=str[i];
-	}
-	//replace(words,src,rep);
-	for(i=0;i<sizeof(words);i++)
-	{
-		printf("%s",words[i]);
-	}
+    char str[100], src[50],rpl[50];
+    int s_len, r_len;
+    printf("Enter a sentence:\n");
+    scanf("%[^\n]s",str);
+    seperate(str);
+    printf("Word to Search:\n");
+    scanf("%s",src);
+    printf("Word to Replace:\n");
+    scanf("%s",rpl);
+    replace(src,rpl);
+    display();
+    return 0;
 }
