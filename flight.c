@@ -12,7 +12,7 @@ struct flight
 
 void input(struct flight *f_in)
 {
-    for(int i=0;i<3;i++)
+    for(int i=0;i<10;i++)
     {
         printf("Enter source code: (UPPERCASE)\n");
         scanf("%s",f_in[i].start);
@@ -30,7 +30,7 @@ void input(struct flight *f_in)
 void display(struct flight *f2)
 {
     printf("\n\nAvailable Flights:\n");
-    for(int i=0;i<3;i++)
+    for(int i=0;i<10;i++)
     {
         printf("Source: %s\tDestination: %s \tStart Time: %d\tEnd Time: %d\t\tRemaining Seats: %d\n",f2[i].start,f2[i].end,f2[i].s_time,f2[i].e_time,f2[i].seats);
     }
@@ -38,7 +38,7 @@ void display(struct flight *f2)
 
 int main()
 {
-    struct flight f[3];
+    struct flight f[10];
     input(f);
     int ch=0;
     char dest[5];
@@ -51,7 +51,7 @@ int main()
         printf("Enter destination code: (UPPERCASE)\n");
         scanf("%s",dest);
         int fl=0;
-        for(int i=0;i<3;i++)
+        for(int i=0;i<10;i++)
         {
             int a=strcmp(src,f[i].start);
             int b=strcmp(dest,f[i].end);
@@ -71,6 +71,7 @@ int main()
             printf("\nEnter flight number to choose flight.");
             int f_no;
             scanf("%d",&f_no);
+            f_no--;
             if(f[f_no].seats>0)
             {
                 f[f_no].seats--;
