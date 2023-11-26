@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<string.h>
 
 void count(char arr[], int c[2][26])
 {
